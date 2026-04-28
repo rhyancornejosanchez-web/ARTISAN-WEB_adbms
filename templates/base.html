@@ -7,7 +7,6 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn&display=swap" rel="stylesheet" />
-    
     <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet" />
     
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
@@ -48,12 +47,51 @@
                     <a href="{{ url_for('views.view_cart') }}" class="cart-btn">🛒</a>
 
                     <div class="dropdown">
-                        <button class="dropbtn">Menu ▾</button>
+                        <button class="dropbtn">
+                            Menu ▾
+                            {% if new_orders_count > 0 %}
+                                <span style="
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    background: #e53935;
+                                    color: white;
+                                    font-size: 0.6rem;
+                                    font-weight: 700;
+                                    min-width: 16px;
+                                    height: 16px;
+                                    border-radius: 50%;
+                                    padding: 0 3px;
+                                    margin-left: 5px;
+                                    line-height: 1;
+                                    vertical-align: middle;
+                                ">{{ new_orders_count }}</span>
+                            {% endif %}
+                        </button>
                         <div class="dropdown-content">
                             {% if current_user.shops|length > 0 %}
                                 <a href="{{ url_for('views.my_shop') }}">My Shop</a>
                                 <a href="{{ url_for('views.dashboard') }}">Dashboard</a>
-                                <a href="{{ url_for('views.shop_orders', shop_id=current_user.shops[0].shop_id) }}">Orders</a>
+                                <a href="{{ url_for('views.shop_orders', shop_id=current_user.shops[0].shop_id) }}" style="position: relative; display: flex; justify-content: space-between; align-items: center;">
+                                    Orders
+                                    {% if new_orders_count > 0 %}
+                                        <span style="
+                                            background: #e53935;
+                                            color: white;
+                                            font-size: 0.65rem;
+                                            font-weight: 700;
+                                            min-width: 18px;
+                                            height: 18px;
+                                            border-radius: 50%;
+                                            display: inline-flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            padding: 0 4px;
+                                            line-height: 1;
+                                            margin-left: 8px;
+                                        ">{{ new_orders_count }}</span>
+                                    {% endif %}
+                                </a>
                             {% else %}
                                 <a href="{{ url_for('views.create_shop') }}">Create Shop</a>
                             {% endif %}

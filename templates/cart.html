@@ -1,37 +1,107 @@
 {% extends "base.html" %}
 {% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}" />
+<style>
+.shop-group {
+  border: 1px solid #d2a679;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.shop-group-header {
+  background: #3e2b1e;
+  color: #f5e6d3;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.shop-group .cart-list {
+  padding: 0 20px;
+}
+.shop-group-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid #eee;
+  background: #fdf6ef;
+}
+.shop-subtotal {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3e2b1e;
+}
+.checkout-btn {
+  background: linear-gradient(135deg, #d2a679, #e6c3a1);
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.checkout-btn:hover {
+  background: #3e2b1e;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.grand-total-box {
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3e2b1e;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 2px solid #d2a679;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="cart-container">
   <h2 class="cart-title">Your Cart</h2>
 
-  {% if cart_items %}
-  <ul class="cart-list">
-  {% for ci in cart_items %}
-    <li class="cart-item">
-      <div class="item-info">
-        <span class="item-name">{{ ci.item.name }}</span>
-        <span class="item-price">₱{{ "%.2f"|format(ci.item.price) }}</span>
-        <span class="item-qty">x {{ ci.quantity }}</span>
+  {% if grouped_items %}
+
+    {% for shop, items in grouped_items %}
+      <div class="shop-group">
+        <div class="shop-group-header">🏪 {{ shop.name }}</div>
+
+        <ul class="cart-list">
+          {% for ci in items %}
+          <li class="cart-item">
+            <div class="item-info">
+              <span class="item-name">{{ ci.item.name }}</span>
+              <span class="item-price">₱{{ "%.2f"|format(ci.item.price) }}</span>
+              <span class="item-qty">× {{ ci.quantity }}</span>
+              <span class="item-price">= ₱{{ "%.2f"|format(ci.subtotal) }}</span>
+            </div>
+            <div class="item-actions">
+              <form method="POST" action="{{ url_for('views.delete_from_cart', cart_item_id=ci.id) }}">
+                <button type="submit" class="remove-btn">Remove</button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="shop-group-footer">
+          <span class="shop-subtotal">
+            Subtotal: ₱{{ "%.2f"|format(items | sum(attribute='subtotal')) }}
+          </span>
+          <form method="POST" action="{{ url_for('views.place_order_for_shop', shop_id=shop.shop_id) }}">
+            <button type="submit" class="checkout-btn">Checkout this Shop</button>
+          </form>
+        </div>
       </div>
+    {% endfor %}
 
-      <div class="item-actions">
-        <form method="POST" action="{{ url_for('views.delete_from_cart', cart_item_id=ci.id) }}" style="display:inline;">
-          <button type="submit" class="remove-btn">Remove</button>
-        </form>
-          <a href="{{ url_for('views.market_item_detail', item_id=ci.item.item_id) }}" class="checkout-btn">
-        Checkout
-      </a>
+    <div class="grand-total-box">
+      Grand Total: ₱{{ "%.2f"|format(total_value) }}
     </div>
-  </li>
-{% endfor %}
- </ul>
-
-  <div class="cart-total">
-    <p>Total: <strong>₱{{ "%.2f"|format(total_value) }}</strong></p>
-  </div>
 
   {% else %}
     <p class="empty-cart">Your cart is empty.</p>

@@ -570,20 +570,34 @@ def market_shop(shop_id):
 def view_cart():
     try:
         cart_items = CartItem.query.filter_by(user_id=current_user.user_id).all()
-        total_value = sum(ci.item.price * ci.quantity for ci in cart_items)
+
+        # Add subtotal to each item for easy template access
+        for ci in cart_items:
+            ci.subtotal = ci.item.price * ci.quantity
+
+        total_value = sum(ci.subtotal for ci in cart_items)
+
+        # Group items by shop: [(shop_obj, [cart_items]), ...]
+        shops = {}
+        for ci in cart_items:
+            shop = ci.item.shop
+            if shop.shop_id not in shops:
+                shops[shop.shop_id] = (shop, [])
+            shops[shop.shop_id][1].append(ci)
+        grouped_items = list(shops.values())
 
         return render_template(
             'cart.html',
             cart_items=cart_items,
+            grouped_items=grouped_items,
             total_value=total_value
         )
 
     except Exception as e:
-        db.session.rollback()  # rollback if query fails
+        db.session.rollback()
         current_app.logger.error(f"Error loading cart for user {current_user.user_id}: {e}")
         flash("An error occurred while loading your cart.", "danger")
         return redirect(url_for('views.market'))
-
 
 
 @views_bp.route('/cart/add/<int:item_id>', methods=['POST'])
@@ -744,7 +758,6 @@ def place_order_for_shop(shop_id):
             flash("Please add your address to your profile first.", "warning")
             return redirect(url_for("views.profile"))
 
-        # Build location string from Address model
         location_str = f"{user.address.street_address}, {user.address.city}, {user.address.province} {user.address.zip_code}"
 
         # Create order
@@ -757,10 +770,16 @@ def place_order_for_shop(shop_id):
         db.session.add(order)
         db.session.commit()
 
-        # Attach cart items as OrderItems
-        cart_items = CartItem.query.filter_by(user_id=user.user_id).all()
+        # Only get cart items belonging to THIS shop
+        cart_items = (
+            CartItem.query
+            .join(Item)
+            .filter(CartItem.user_id == user.user_id, Item.shop_id == shop_id)
+            .all()
+        )
+
         if not cart_items:
-            flash("Your cart is empty.", "warning")
+            flash("No items from this shop in your cart.", "warning")
             return redirect(url_for("views.view_cart"))
 
         for ci in cart_items:
@@ -772,12 +791,12 @@ def place_order_for_shop(shop_id):
             )
             db.session.add(order_item)
 
-            # Auto-deduct stock when order is placed
+            # Deduct stock
             if ci.item:
                 ci.item.stock = max(ci.item.stock - ci.quantity, 0)
 
-        # Clear cart after placing order
-        CartItem.query.filter_by(user_id=user.user_id).delete()
+            # Only delete THIS shop's cart items
+            db.session.delete(ci)
 
         db.session.commit()
 
@@ -785,7 +804,7 @@ def place_order_for_shop(shop_id):
         return redirect(url_for("views.my_orders"))
 
     except Exception as e:
-        db.session.rollback()  # rollback to keep DB consistent
+        db.session.rollback()
         current_app.logger.error(f"Error placing order for shop {shop_id}: {e}")
         flash("An error occurred while placing your order.", "danger")
         return redirect(url_for("views.view_cart"))

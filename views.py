@@ -20,37 +20,20 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        try:
-            # Query user by username
-            user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
 
-            if not user:
-                flash("Username not found.", "warning")
-                return redirect(url_for("views.login"))
-
-            # Password check
-            if not user.check_password(form.password.data):
-                flash("Incorrect password.", "danger")
-                return redirect(url_for("views.login"))
-
-            # Successful login
-            login_user(user, remember=form.remember_me.data)
-            flash("Login successfully!", "success")
-
-            # Redirect logic: shop or profile
-            if hasattr(user, "shops") and user.shops:
-                return redirect(url_for("home"))
-            else:
-                return redirect(url_for("home"))  # safer fallback
-
-        except Exception as e:
-            # Rollback in case of DB/session issues
-            db.session.rollback()
-            current_app.logger.error(f"Login error: {e}", exc_info=True)
-            flash("An unexpected error occurred. Please try again.", "danger")
+        if not user:
+            flash("Username not found.", "warning")
             return redirect(url_for("views.login"))
 
-    # GET request or invalid form
+        if not user.check_password(form.password.data):
+            flash("Incorrect password.", "danger")
+            return redirect(url_for("views.login"))
+
+        login_user(user, remember=form.remember_me.data)
+        flash("Login successfully!", "success")
+        return redirect(url_for("home"))
+
     return render_template("login.html", form=form)
     
 # ----------------------------------------------------- LOGOUT --------------------------------------------------------
@@ -352,7 +335,6 @@ def delete_product(item_id):
 @login_required
 def dashboard():
     try:
-        # Guard against users without shops
         if not current_user.shops:
             flash("You don't have a shop yet. Please create one first.", "warning")
             return redirect(url_for("views.create_shop"))
@@ -399,6 +381,13 @@ def dashboard():
             .filter(Order.shop_id == shop.shop_id, Order.status == "shipped")
             .scalar() or 0
         )
+
+        ratings = (
+            Rating.query.filter_by(shop_id=shop.shop_id)
+            .order_by(Rating.id.desc())
+            .all()
+        )
+
         return render_template(
             'dashboard.html',
             shop=shop,
@@ -408,15 +397,15 @@ def dashboard():
             avg_rating=avg_rating,
             recent_items=recent_items,
             total_sold=total_sold,
-            sales_value=sales_value
+            sales_value=sales_value,
+            ratings=ratings
         )
 
     except Exception as e:
-        db.session.rollback()  # rollback if query fails
+        db.session.rollback()
         current_app.logger.error(f"Error loading dashboard for user {current_user.user_id}: {e}")
         flash("An error occurred while loading your dashboard.", "danger")
         return redirect(url_for("views.home"))
-
 
 
 
@@ -690,6 +679,61 @@ def my_orders():
 
 
 
+@views_bp.route("/item/<int:item_id>/place_order_now", methods=["POST"])
+@login_required
+def place_order_now(item_id):
+    """Place an order directly from the item detail page (Place Order Now button)."""
+    try:
+        item = Item.query.get_or_404(item_id)
+        user = current_user
+
+        if not user.address:
+            flash("Please add your address to your profile first.", "warning")
+            return redirect(url_for("views.profile"))
+
+        quantity = int(request.form.get("quantity", 1))
+
+        if quantity < 1:
+            flash("Invalid quantity.", "danger")
+            return redirect(url_for("views.market_item_detail", item_id=item_id))
+
+        if quantity > item.stock:
+            flash(f"Only {item.stock} left in stock.", "danger")
+            return redirect(url_for("views.market_item_detail", item_id=item_id))
+
+        location_str = f"{user.address.street_address}, {user.address.city}, {user.address.province} {user.address.zip_code}"
+
+        order = Order(
+            user_id=user.user_id,
+            shop_id=item.shop_id,
+            location=location_str,
+            status="placed"
+        )
+        db.session.add(order)
+        db.session.flush()  # get order.id before commit
+
+        order_item = OrderItem(
+            order_id=order.id,
+            item_id=item.item_id,
+            quantity=quantity,
+            price=item.price
+        )
+        db.session.add(order_item)
+
+        # Auto-deduct stock immediately
+        item.stock = max(item.stock - quantity, 0)
+
+        db.session.commit()
+        flash("Order placed successfully!", "success")
+        return redirect(url_for("views.my_orders"))
+
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(f"Error placing direct order for item {item_id}: {e}")
+        flash("An error occurred while placing your order.", "danger")
+        return redirect(url_for("views.market_item_detail", item_id=item_id))
+
+
 @views_bp.route("/cart/place_order/<int:shop_id>", methods=["POST"])
 @login_required
 def place_order_for_shop(shop_id):
@@ -727,6 +771,10 @@ def place_order_for_shop(shop_id):
                 price=ci.item.price
             )
             db.session.add(order_item)
+
+            # Auto-deduct stock when order is placed
+            if ci.item:
+                ci.item.stock = max(ci.item.stock - ci.quantity, 0)
 
         # Clear cart after placing order
         CartItem.query.filter_by(user_id=user.user_id).delete()
@@ -945,20 +993,15 @@ def ship_order(order_id):
         current_app.logger.debug(f"Processing ship request for Order ID: {order.id}")
         current_app.logger.debug(f"Order {order.id} status BEFORE change: {order.status}")
 
-        # Decrement stock for each item in the order
+        # Stock was already deducted at order placement — just log missing items
         for order_item in order.order_items:
-            item = order_item.item
-            if item:
-                current_app.logger.debug(f"Before: Item '{item.name}' (ID: {item.item_id}) stock = {item.stock}, ordered = {order_item.quantity}")
-                item.stock = max(item.stock - order_item.quantity, 0)
-                current_app.logger.debug(f"After: Item '{item.name}' (ID: {item.item_id}) new stock = {item.stock}")
-            else:
-                current_app.logger.warning(f"Item with ID {order_item.item_id} not found for order item {order_item.id} in Order {order.id}.")
+            if not order_item.item:
+                current_app.logger.warning(f"Item ID {order_item.item_id} not found for order item {order_item.id} in Order {order.id}.")
 
         order.status = "shipped"
         current_app.logger.debug(f"Order {order.id} status AFTER change (before commit): {order.status}")
 
-        current_app.logger.info(f"Attempting to commit changes for Order ID: {order.id} (status 'shipped' and stock updates).")
+        current_app.logger.info(f"Attempting to commit changes for Order ID: {order.id} (status 'shipped').")
         db.session.commit()
         current_app.logger.info(f"Successfully committed changes for Order ID: {order.id}. New status in DB should be 'shipped'.")
 

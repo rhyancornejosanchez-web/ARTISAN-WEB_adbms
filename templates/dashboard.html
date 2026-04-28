@@ -9,7 +9,6 @@
 <div class="container">
     <h2>{{ shop.name }} Dashboard</h2>
 
-    
     <div class="summary-grid">
         <div class="card">
             <h5>Total Products</h5>
@@ -35,8 +34,7 @@
             {% else %}
                 <p>No ratings yet.</p>
             {% endif %}
-                </div>
-    
+        </div>
         <div class="card">
             <h5>Total Sold</h5>
             <h2>{{ total_sold }}</h2>
@@ -45,9 +43,8 @@
             <h5>Sales Revenue</h5>
             <h2>₱{{ "%.2f"|format(sales_value) }}</h2>
         </div>
-    </div> 
+    </div>
 
-    
     <h3>Recent Items</h3>
     <ul class="recent-list">
         {% for item in recent_items %}
@@ -57,5 +54,29 @@
         </li>
         {% endfor %}
     </ul>
+
+    <h3 style="margin-top: 2rem;">Customer Ratings</h3>
+    {% if ratings %}
+        <ul class="recent-list">
+            {% for r in ratings %}
+            <li class="recent-item" style="flex-direction: column; align-items: flex-start; gap: 0.25rem;">
+                <div style="display: flex; justify-content: space-between; width: 100%;">
+                    <strong>{{ r.user.username }}</strong>
+                    <span>
+                        {% for i in range(r.value) %}⭐{% endfor %}
+                        <span style="font-size: 0.85rem; color: #aaa;">({{ r.value }}/5)</span>
+                    </span>
+                </div>
+                {% if r.user.first_name or r.user.last_name %}
+                    <span style="font-size: 0.85rem; color: #aaa;">
+                        {{ r.user.first_name or '' }} {{ r.user.last_name or '' }}
+                    </span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: #aaa;">No customer ratings yet.</p>
+    {% endif %}
 </div>
 {% endblock %}

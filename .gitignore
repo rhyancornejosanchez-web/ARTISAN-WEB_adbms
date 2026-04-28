@@ -1,1 +1,5 @@
-instance/Web_app.db
+__pycache__/
+*.pyc
+Web_app.db
+.env
+venv/

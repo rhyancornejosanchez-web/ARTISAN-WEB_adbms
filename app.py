@@ -6,14 +6,14 @@ from views import views_bp
 from cli_command import register_cli_commands
 import os
 
-
-
 # --- Initialize Flask App ---
 app = Flask(__name__)
 
 # --- Configuration ---
-# for local dev only
-app.config['SECRET_KEY'] = 'your_secret_key' 
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-fallback-change-in-production')
+
+# --- Ensure instance folder exists ---
+os.makedirs(app.instance_path, exist_ok=True)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'Web_app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -36,6 +36,10 @@ def load_user(user_id):
 app.register_blueprint(views_bp)
 register_cli_commands(app)
 
+# --- Auto-create DB tables if they don't exist ---
+with app.app_context():
+    db.create_all()
+
 # --- Routes ---
 @app.route("/")
 def home():
@@ -44,5 +48,3 @@ def home():
 # --- Main Execution ---
 if __name__ == '__main__':
     app.run(debug=True)
-
-    

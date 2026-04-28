@@ -7,19 +7,19 @@
 {% block content %}
 <div class="item-detail">
 
-  
+
   <div class="shop-link-top">
     <a href="{{ url_for('views.market_shop', shop_id=item.shop.shop_id) }}">
       Visit {{ item.shop.name }}
     </a>
   </div>
 
-  <!-- Product Image -->
+
   <div class="item-image">
     <img src="{{ url_for('static', filename=item.img_url.replace('/static/', '')) }}" alt="{{ item.name }}">
   </div>
 
-  <!-- Product Info -->
+ 
   <div class="item-info">
     <h2 class="item-title">{{ item.name }}</h2>
     <p class="item-desc">{{ item.description }}</p>
@@ -29,13 +29,13 @@
       <span class="price">₱{{ "%.2f"|format(item.price) }}</span>
     </div>
 
-    <!-- Show stock -->
+
     <p class="stock-info">
       Available Stock: <strong>{{ item.stock }}</strong>
     </p>
 
     {% if item.stock > 0 %}
-      <!-- Add to Cart Form -->
+    
       <form method="POST" class="cart-form">
         {{ form.hidden_tag() }}
 
@@ -48,8 +48,10 @@
         {{ form.submit(class="cart-btn") }}
       </form>
 
-      <!-- Direct Place Order Button -->
-      <form method="POST" action="{{ url_for('views.place_order_for_shop', shop_id=item.shop.shop_id) }}">
+   
+      <form method="POST" action="{{ url_for('views.place_order_now', item_id=item.item_id) }}">
+        {{ form.hidden_tag() }}
+        <input type="hidden" name="quantity" id="order-qty" value="1">
         <button type="submit" class="btn btn-success">Place Order Now</button>
       </form>
     {% else %}
@@ -64,7 +66,12 @@ function changeQty(delta) {
   let current = parseInt(qtyInput.value) || 1;
   current += delta;
   if (current < 1) current = 1;
+  const max = parseInt(qtyInput.getAttribute("max")) || 9999;
+  if (current > max) current = max;
   qtyInput.value = current;
+ 
+  const orderQty = document.getElementById("order-qty");
+  if (orderQty) orderQty.value = current;
 }
 </script>
 {% endblock %}

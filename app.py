@@ -43,11 +43,18 @@ with app.app_context():
 # --- Inject new order count for shop owner nav badge ---
 @app.context_processor
 def inject_new_orders_count():
-    count = 0
-    if current_user.is_authenticated and current_user.shops:
-        shop_id = current_user.shops[0].shop_id
-        count = Order.query.filter_by(shop_id=shop_id, status='placed').count()
-    return dict(new_orders_count=count)
+    new_orders_count = 0
+    shipped_count = 0
+    if current_user.is_authenticated:
+        if current_user.shops:
+            shop_id = current_user.shops[0].shop_id
+            new_orders_count = Order.query.filter_by(shop_id=shop_id, status='placed').count()
+        shipped_count = Order.query.filter_by(
+            user_id=current_user.user_id,
+            status='shipped',
+            seen_by_buyer=False
+        ).count()
+    return dict(new_orders_count=new_orders_count, shipped_count=shipped_count)
 
 # --- Routes ---
 @app.route("/")

@@ -129,6 +129,7 @@ class Order(db.Model):
     status = db.Column(db.String(20), default="placed")  # placed, shipped, received, canceled
     location = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    seen_by_buyer = db.Column(db.Boolean, default=True)  # False = new shipped notification
 
     order_items = db.relationship("OrderItem", backref="order", lazy=True)
     shop = db.relationship("Shop", backref="orders")

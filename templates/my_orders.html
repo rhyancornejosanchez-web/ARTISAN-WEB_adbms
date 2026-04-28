@@ -15,10 +15,24 @@
     <th>Actions</th>
   </tr>
   {% for order in orders %}
-    <tr>
+    <tr {% if order.status == 'shipped' and not order.seen_by_buyer %}style="background-color: rgba(229, 57, 53, 0.08);"{% endif %}>
       <td>{{ order.id }}</td>
       <td>{{ order.shop.name }}</td>
-      <td>{{ order.status }}</td>
+      <td>
+        {{ order.status }}
+        {% if order.status == 'shipped' and not order.seen_by_buyer %}
+          <span style="
+            background: #e53935;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 99px;
+            margin-left: 6px;
+            vertical-align: middle;
+          ">New</span>
+        {% endif %}
+      </td>
       <td>
         <ul>
           {% for order_item in order.order_items %}
@@ -33,20 +47,17 @@
       </td>
       <td>
         <div class="action-buttons">
-            
           <a href="{{ url_for('views.order_detail', order_id=order.id) }}" class="btn btn-view">View</a>
 
           {% if order.status == 'placed' %}
             <form method="POST" action="{{ url_for('views.cancel_order_user', order_id=order.id) }}">
               <button type="submit" class="btn btn-danger">Cancel</button>
             </form>
-
           {% elif order.status == 'shipped' %}
             <form method="POST" action="{{ url_for('views.receive_order_user', order_id=order.id) }}">
               <button type="submit" class="btn btn-success">Received</button>
             </form>
           {% endif %}
-          
         </div>
       </td>
     </tr>

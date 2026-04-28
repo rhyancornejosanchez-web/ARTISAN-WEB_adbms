@@ -49,7 +49,7 @@
                     <div class="dropdown">
                         <button class="dropbtn">
                             Menu ▾
-                            {% if new_orders_count > 0 %}
+                            {% if new_orders_count > 0 or shipped_count > 0 %}
                                 <span style="
                                     display: inline-flex;
                                     align-items: center;
@@ -65,7 +65,7 @@
                                     margin-left: 5px;
                                     line-height: 1;
                                     vertical-align: middle;
-                                ">{{ new_orders_count }}</span>
+                                ">{{ new_orders_count + shipped_count }}</span>
                             {% endif %}
                         </button>
                         <div class="dropdown-content">
@@ -87,7 +87,6 @@
                                             align-items: center;
                                             justify-content: center;
                                             padding: 0 4px;
-                                            line-height: 1;
                                             margin-left: 8px;
                                         ">{{ new_orders_count }}</span>
                                     {% endif %}
@@ -96,7 +95,25 @@
                                 <a href="{{ url_for('views.create_shop') }}">Create Shop</a>
                             {% endif %}
 
-                            <a href="{{ url_for('views.my_orders') }}">My Purchase</a>
+                            <a href="{{ url_for('views.my_orders') }}" style="display: flex; justify-content: space-between; align-items: center;">
+                                My Purchase
+                                {% if shipped_count > 0 %}
+                                    <span style="
+                                        background: #e53935;
+                                        color: white;
+                                        font-size: 0.65rem;
+                                        font-weight: 700;
+                                        min-width: 18px;
+                                        height: 18px;
+                                        border-radius: 50%;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding: 0 4px;
+                                        margin-left: 8px;
+                                    ">{{ shipped_count }}</span>
+                                {% endif %}
+                            </a>
                             <a href="{{ url_for('views.logout', user_id=current_user.user_id) }}">Log Out</a>
                         </div>
                     </div>

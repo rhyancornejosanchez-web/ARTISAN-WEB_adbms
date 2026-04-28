@@ -673,6 +673,7 @@ def delete_from_cart(cart_item_id):
 
 # ------------------------------------------------- ORDERING ACTION -------------------------------------
 
+# Replace my_orders route
 @views_bp.route("/my_orders")
 @login_required
 def my_orders():
@@ -683,10 +684,16 @@ def my_orders():
             .order_by(Order.id.desc())
             .all()
         )
+        # Mark all shipped orders as seen when buyer visits this page
+        for order in orders:
+            if order.status == 'shipped' and not order.seen_by_buyer:
+                order.seen_by_buyer = True
+        db.session.commit()
+
         return render_template("my_orders.html", orders=orders)
 
     except Exception as e:
-        db.session.rollback()  # rollback if query fails
+        db.session.rollback()
         current_app.logger.error(f"Error loading orders for user {current_user.user_id}: {e}")
         flash("An error occurred while loading your orders.", "danger")
         return redirect(url_for("home"))
@@ -1018,8 +1025,9 @@ def ship_order(order_id):
                 current_app.logger.warning(f"Item ID {order_item.item_id} not found for order item {order_item.id} in Order {order.id}.")
 
         order.status = "shipped"
-        current_app.logger.debug(f"Order {order.id} status AFTER change (before commit): {order.status}")
+        order.seen_by_buyer = False  # ← notify the buyer
 
+        current_app.logger.debug(f"Order {order.id} status AFTER change (before commit): {order.status}")
         current_app.logger.info(f"Attempting to commit changes for Order ID: {order.id} (status 'shipped').")
         db.session.commit()
         current_app.logger.info(f"Successfully committed changes for Order ID: {order.id}. New status in DB should be 'shipped'.")
@@ -1027,15 +1035,13 @@ def ship_order(order_id):
         flash(f"Order #{order.id} shipped successfully.", "success")
 
     except Exception as e:
-        db.session.rollback()  # rollback to keep DB consistent
-        current_app.logger.error(f"Error shipping order {order_id}: {e}", exc_info=True) # exc_info=True prints the full traceback
+        db.session.rollback()
+        current_app.logger.error(f"Error shipping order {order_id}: {e}", exc_info=True)
         flash("An error occurred while shipping the order.", "danger")
-        # If an error occurs before 'order' is fully defined or committed,
-        # redirect might fail. Ensure 'order' is available or handle gracefully.
-        if 'order' in locals(): # Check if order variable exists
+        if 'order' in locals():
             return redirect(url_for("views.shop_orders", shop_id=order.shop_id))
         else:
-            return redirect(url_for("home")) # Fallback if order object is not available
+            return redirect(url_for("home"))
 
     return redirect(url_for("views.shop_orders", shop_id=order.shop_id))
 # _________________________________________________ BLOG POST ROUTES _____________________________________________

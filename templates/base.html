@@ -37,7 +37,7 @@
             <h1 class="web_title">Likharyo</h1>
 
             <nav class="nav-buttons">
-                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('views.home') }}" class="nav-link">Home</a>
                 <a href="{{ url_for('views.about') }}" class="nav-link">About</a>
                 <a href="{{ url_for('views.blog_list') }}" class="nav-link">Blog Post</a>
 
@@ -114,7 +114,7 @@
                                     ">{{ shipped_count }}</span>
                                 {% endif %}
                             </a>
-                            <a href="{{ url_for('views.logout', user_id=current_user.user_id) }}">Log Out</a>
+                            <a href="{{ url_for('views.landing', user_id=current_user.user_id) }}">Log Out</a>
                         </div>
                     </div>
                 {% else %}

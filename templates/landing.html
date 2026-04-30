@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Likharyo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Ruthie&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+</head>
+<body>
+
+<section>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content">
+        
+            <img src="{{ url_for('static', filename='images/beige.png') }}" class="hero-logo">
+
+            <h1 class="brand-font">Likharyo</h1>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('views.login') }}" class="btn btn-login">Log In</a>
+                <a href="{{ url_for('views.sign_up') }}" class="btn btn-signup">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+        <h2 class="script-font">About Us</h2>
+        <p>
+            Likharyo is a digital marketplace powered by Flask that serves as a bridge,
+            connecting shoppers who value sustainable handcrafted goods with local
+            Filipino craftsmen.
+        </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section">
+        <h2 class="script-font">Services We Provide</h2>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">01</span>
+                    <img src="{{ url_for('static', filename='images/1.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Artisan Marketplace</h3>
+                    <p>Browse handcrafted Filipino products from trusted local artisans.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">02</span>
+                    <img src="{{ url_for('static', filename='images/2.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Digital Storefront</h3>
+                    <p>Vendors can create online shops and manage inventory with ease.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">03</span>
+                    <img src="{{ url_for('static', filename='images/3.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Order Management</h3>
+                    <p>Track customer orders, payments, and deliveries efficiently.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">04</span>
+                    <img src="{{ url_for('static', filename='images/4.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Shop Ratings</h3>
+                    <p>Buyers can rate shops to build trust and credibility.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">05</span>
+                    <img src="{{ url_for('static', filename='images/5.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Dashboard</h3>
+                    <p>See analytics, sales reports, ratings, and shop performance.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image-box">
+                    <span class="service-number">06</span>
+                    <img src="{{ url_for('static', filename='images/6.png') }}">
+                </div>
+                <div class="service-info">
+                    <h3>Community Blog</h3>
+                    <p>Share artisan stories, tutorials, and community updates.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</section>
+
+</body>
+</html>

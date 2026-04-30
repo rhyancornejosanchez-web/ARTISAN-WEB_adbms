@@ -12,6 +12,14 @@ from datetime import datetime
 
 views_bp = Blueprint('views', __name__, url_prefix='/')
 
+@views_bp.route('/')
+def landing():
+    return render_template('landing.html')
+
+@views_bp.route('/home')
+@login_required
+def home():
+    return render_template('home.html')
 
 # ---------------------------------------------- AUTHENTICATION ROUTES ---------------------------------------------
 # ----------- LOGIN -----------
@@ -32,7 +40,7 @@ def login():
 
         login_user(user, remember=form.remember_me.data)
         flash("Login successfully!", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("views.home"))
 
     return render_template("login.html", form=form)
     

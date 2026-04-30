@@ -1,0 +1,233 @@
+/* ===============================
+   IMPORT / RESET
+================================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+}
+
+section{
+    width:100%;
+    max-width:1450px;
+    margin:auto;
+}
+
+/* ===============================
+   FONTS
+================================= */
+
+/* Likharyo */
+.brand-font{
+    font-family: 'Fleur De Leah', cursive;
+    font-size:7rem;
+    font-weight:400;
+}
+
+/* About + Services headings */
+.script-font{
+    font-family: 'Ruthie', cursive;
+    font-size:4.5rem;
+    font-weight:400;
+}
+
+/* ===============================
+   HERO
+================================= */
+.hero{
+    position:relative;
+    height:500px;
+    background:url('/static/images/main.jpg') center center/cover no-repeat;
+    margin:18px;
+    border-radius:25px;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-logo{
+    width:220px;
+    height:auto;
+    margin-bottom:0px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+}
+
+/* dark overlay */
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+/* buttons */
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:22px;
+}
+
+.btn{
+    padding:10px 26px;
+    border-radius:10px;
+    font-size:14px;
+    text-decoration:none;
+    transition:.3s ease;
+}
+
+/* login button */
+.btn-login{
+    background:#8b5e34;
+    color:#fff;
+}
+
+.btn-login:hover{
+    background:#734c2a;
+}
+
+/* signup button */
+.btn-signup{
+    border:1px solid rgba(255,255,255,.7);
+    color:#fff;
+}
+
+.btn-signup:hover{
+    background:rgba(255,255,255,.08);
+}
+
+/* ===============================
+   ABOUT
+================================= */
+.about-section{
+    padding:55px 55px 25px;
+    max-width:980px;
+}
+
+.about-section p{
+    font-size:17px;
+    color:#e6e6e6;
+    line-height:1.5;
+}
+
+/* ===============================
+   SERVICES
+================================= */
+.services-section{
+    padding:10px 35px 70px;
+}
+
+/* GRID */
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:18px;
+}
+
+/* CARD */
+.service-card{
+    display:flex;
+    flex-direction:column;
+}
+
+/* IMAGE BOX */
+.service-image-box{
+    position:relative;
+    height:150px;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.12);
+    background:#111;
+}
+
+.service-image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.service-image-box::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.22);
+}
+
+/* NUMBER */
+.service-number{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:2;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* TEXT */
+.service-info{
+    padding-top:12px;
+}
+
+.service-info h3{
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.service-info p{
+    font-size:11px;
+    line-height:1.45;
+    color:rgba(255,255,255,.72);
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media(max-width:1300px){
+    .services-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:768px){
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .brand-font{
+        font-size:4rem;
+    }
+
+    .script-font{
+        font-size:3rem;
+    }
+}
+
+@media(max-width:520px){
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        height:400px;
+    }
+
+    .brand-font{
+        font-size:3rem;
+    }
+}

@@ -1,124 +1,316 @@
-/* Hero Section */
+/* ───────── GLOBAL TYPOGRAPHY ───────── */
+body {
+    margin: 0;
+    background: #F0EAD2;
+    font-family: 'DM Sans', sans-serif;
+    color: #3B2F24;
+    letter-spacing: 0.2px;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.3px;
+    line-height: 1.15;
+    color: #3B2F24;
+}
+
+/* ───────── HOME HERO ───────── */
 .hero {
     text-align: center;
-    padding: 3rem 2rem;
-    background: radial-gradient(800px at 20% 20%, rgba(222,184,135,0.15), transparent 80%);
-    border-radius: 10px 10px 10px 10px;
-    height: auto;
+    padding: 5rem 2.5rem;
+    background: #fbf5e9;
+    border-radius: 22px;
+    margin: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(59,47,36,0.10);
 }
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 60px solid rgba(173,193,120,0.12);
+    top: -140px;
+    left: -140px;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 50px solid rgba(169,132,103,0.12);
+    bottom: -120px;
+    right: -120px;
+}
+
 .hero h1 {
-    font-size: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 600;
     margin-bottom: 1rem;
-    color: #222;
+    color: #3B2F24;
 }
+
 .hero p {
-    font-size: 1.2rem;
-    color: #555;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: #7A6652;
     max-width: 700px;
     margin: 0 auto;
+    line-height: 1.7;
 }
+
 .btn-explore {
     display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #333;
-    color: #fff;
+    margin-top: 1.8rem;
+    padding: 0.9rem 1.8rem;
+    background: #3B2F24;
+    color: #F0EAD2;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s, transform 0.3s;
 }
+
 .btn-explore:hover {
-    background-color: #555;
+    background: #6C584C;
+    transform: translateY(-3px);
 }
 
-/* Featured Artisans Section */
+/* ───────── SECTION HEADINGS ───────── */
+.featured-artisans h2,
+.trending-products h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin: 0 0 1.8rem 0;
+    letter-spacing: 0.4px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Decorative underline on section headings */
+.featured-artisans h2::after,
+.trending-products h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #ADC178;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+/* ───────── FEATURED ARTISANS ───────── */
 .featured-artisans {
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
     text-align: center;
-}
-.featured-artisans h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #3e2b1e;
+    margin-bottom: 2rem;
 }
 
-/* Artisan Grid */
 .artisan-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    padding: 0 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
 .artisan-card {
-    width: 160px;
+    background: #ffffff5f;
+    border: 1px solid #98896e;
+    border-radius: 14px;
+    padding: 1rem;
     text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.artisan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(59,47,36,0.12);
+}
+
 .artisan-card img {
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-.artisan-card img:hover {
-    transform: scale(1.05);
-}
-.artisan-card p {
-    margin-top: 0.5rem;
-    font-weight: bold;
-    color: #333;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
-.trending-products {
-    padding: 2rem;
-    text-align: center;
+.artisan-card p {
+    margin-top: 0.7rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #3B2F24;
 }
-.trending-products h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #3e2b1e;
+
+/* ───────── TRENDING PRODUCTS ───────── */
+.trending-products {
+    padding: 3rem 2rem 4rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 2rem;
-    justify-items: center;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.2rem;
+    padding: 0 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
 
 .product-card {
-    width: 200px;
+    background: #ffffff5f;
+    border: 1px solid #98896e;
+    border-radius: 12px;
+    padding: 0.8rem;
     text-align: center;
-    border: 1px solid #d4a373;
-    background-color: #ece0ce7d;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .product-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(59,47,36,0.10);
 }
+
 .product-card img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
+
 .product-name {
-    margin-top: 0.5rem;
-    font-weight: bold;
-    color: #333;
+    margin-top: 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #3B2F24;
+    line-height: 1.4;
 }
 
+/* ───────── LOGIN PAGE ───────── */
+.auth-left {
+    background: linear-gradient(145deg, #3B2F24, #2C2018);
+    position: relative;
+    overflow: hidden;
+}
 
-/* Responsive */
+.auth-left::before {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 60px solid rgba(173,193,120,0.12);
+    top: -140px;
+    left: -140px;
+}
+
+.auth-left::after {
+    content: '';
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    border: 50px solid rgba(169,132,103,0.12);
+    bottom: -140px;
+    right: -120px;
+}
+
+.auth-left-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.auth-left-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(173,193,120,0.3);
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: #F0EAD2;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+}
+
+.auth-left-tag::before,
+.auth-left-tag::after {
+    content: "✦";
+    color: #ADC178;
+    font-size: 9px;
+}
+
+.auth-card {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-radius: 22px;
+    padding: 44px 40px;
+    border: 1px solid rgba(173,193,120,0.25);
+    box-shadow: 0 18px 50px rgba(59,47,36,0.18);
+}
+
+.form-input {
+    border-radius: 10px;
+    background: #FDFAF4;
+    border: 1px solid #D6CCBA;
+}
+
+.auth-btn {
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3B2F24, #6C584C);
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .artisan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .featured-artisans h2,
+    .trending-products h2 {
         font-size: 2rem;
     }
-    .hero p {
-        font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 3rem 1.5rem;
+        margin: 1rem;
     }
-    .artisan-card {
-        width: 120px;
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

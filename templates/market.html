@@ -1,50 +1,143 @@
 {% extends "base.html" %}
 
-{% block extra_css %} 
-  <link rel="stylesheet" href="{{ url_for('static', filename='market.css') }}" /> 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='market.css') }}">
 {% endblock %}
 
 {% block content %}
-<h1 class="heading-title">Marketplace</h1>
 
-<!-- Search Bar Section -->
-<div class="search-section">
-  <form method="POST" action="{{ url_for('views.global_market') }}">
-    {{ form.hidden_tag() }}
+<div class="market-container">
 
-    <div class="search-bar">
-      {{ form.name(class="search-input", placeholder="Search this...") }}
-      <button type="submit" class="search-button">🔍</button>
+    <!-- HEADER -->
+    <div class="market-header">
+
+        <div class="market-heading">
+            <h1 class="heading-title">Marketplace</h1>
+
+            <p class="market-subtitle">
+                Discover handcrafted products, local artistry, and unique creations from talented artisans.
+            </p>
+        </div>
+
     </div>
 
-    <div class="filter-row">
-        <p>FILTER:
-        {{ form.category(class="filter-select") }}
-        {{ form.min_price(class="filter-input", placeholder="Min ₱") }}
-        {{ form.max_price(class="filter-input", placeholder="Max ₱") }}
-        {{ form.sort_by(class="filter-select") }}
-        {{ form.order(class="filter-select") }}
+    <!-- SEARCH + FILTER -->
+    <div class="search-wrapper">
+
+        <div class="search-section">
+
+            <form method="POST" action="{{ url_for('views.global_market') }}">
+
+                {{ form.hidden_tag() }}
+
+                <!-- SEARCH -->
+                <div class="search-bar">
+
+                    {{ form.name(
+                        class="search-input",
+                        placeholder="Search handmade crafts, accessories, decor..."
+                    ) }}
+
+                    <button type="submit" class="search-button">
+                        Search
+                    </button>
+
+                </div>
+
+                <!-- FILTERS -->
+                <div class="filter-row">
+
+                    <div class="filter-group">
+                        <label>Category</label>
+                        {{ form.category(class="filter-select") }}
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Min Price</label>
+                        {{ form.min_price(class="filter-input", placeholder="₱0") }}
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Max Price</label>
+                        {{ form.max_price(class="filter-input", placeholder="₱9999") }}
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Sort By</label>
+                        {{ form.sort_by(class="filter-select") }}
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Order</label>
+                        {{ form.order(class="filter-select") }}
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div class="shop-grid">
+
+        {% for item in items %}
+
+        <div class="item-card">
+
+            <!-- PRODUCT IMAGE -->
+            <img
+                src="{{ url_for('static', filename=item.img_url.replace('/static/', '')) }}"
+                alt="{{ item.name }}"
+            >
+
+            <!-- CONTENT -->
+            <div class="item-content">
+
+                <h3>{{ item.name }}</h3>
+
+                <p class="shop-name">
+                    {{ item.shop.name }}
+                </p>
+
+                <span class="price">
+                    ₱{{ "%.2f"|format(item.price) }}
+                </span>
+
+                <div class="btn-row">
+
+                    <a
+                        href="{{ url_for('views.market_item_detail', item_id=item.item_id) }}"
+                        class="btn btn-dark"
+                    >
+                        View Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- EMPTY STATE -->
+    {% if not items %}
+    <div class="empty-market">
+
+        <h2>No Products Found</h2>
+
+        <p>
+            Try changing your search or filter settings.
         </p>
+
     </div>
-  </form>
+    {% endif %}
+
 </div>
 
-<!-- Product Grid -->
-<div class="shop-grid">
-  {% for item in items %}
-    <div class="item-card">
-      <img src="{{ url_for('static', filename=item.img_url.replace('/static/', '')) }}" alt="{{ item.name }}">
-      <h3>{{ item.name }}</h3>
-      <span class="price">₱{{ "%.2f"|format(item.price) }}</span>
-
-      <!-- Centered View Product button -->
-      <div class="btn-row">
-        <a href="{{ url_for('views.market_item_detail', item_id=item.item_id) }}" class="btn btn-dark">View Product</a>
-      </div>
-
-      <!-- Shop name plain text bottom right -->
-      <p class="shop-name">{{ item.shop.name }}</p>
-    </div>
-  {% endfor %}
-</div>
 {% endblock %}

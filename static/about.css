@@ -1,150 +1,271 @@
-/* General container alignment */
+/* ───────── GENERAL CONTAINER ───────── */
 .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Intro section */
+/* ───────── INTRO SECTION ───────── */
 .about-intro {
-  margin-top: 0;          
-  padding: 80px 20px 60px; 
-  text-align: center;
-  background: radial-gradient(800px at 20% 20%, rgba(222,184,135,0.15), transparent 70%);
-  border-bottom: 2px solid #a65c2a;
+    margin: 2rem;
+    padding: 5rem 2.5rem;
+    text-align: center;
+    background: #fbf5e9;
+    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(59,47,36,0.10);
 }
+
+/* Decorative circles matching hero */
+.about-intro::before {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 60px solid rgba(173,193,120,0.12);
+    top: -140px;
+    left: -140px;
+}
+
+.about-intro::after {
+    content: '';
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 50px solid rgba(169,132,103,0.12);
+    bottom: -120px;
+    right: -120px;
+}
+
 .about-intro h1 {
-  font-size: 4.0rem;
-  color: #432818;
-  margin-bottom: 0px;
-  font-family: "Cambria", Georgia, serif;
-  letter-spacing: 1px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.8rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.4px;
+    line-height: 1.15;
 }
+
 .about-intro .lede {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #a65c2a;
-  margin-bottom: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ADC178;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
 }
+
 .about-intro p {
-  max-width: 70ch;
-  margin-inline: auto;
-  color: #1a1a1a;
-  font-size: 1.10rem;
-  line-height: 1.5;
+    font-family: 'DM Sans', sans-serif;
+    max-width: 70ch;
+    margin-inline: auto;
+    color: #7A6652;
+    font-size: 1.1rem;
+    line-height: 1.7;
 }
 
-/* Offer section */
+/* ───────── OFFER SECTION ───────── */
 .about-offer {
-  margin-top: 40px;
-  padding: 60px 20px;
-  background: #f7f2eb;
-  border-left: 5px solid #a65c2a;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 2rem;
+    padding: 3rem 2.5rem;
+    background: #fffdf7;
+    border: 1px solid #D6CCBA;
+    border-left: 4px solid #ADC178;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(59,47,36,0.08);
 }
+
 .offer-container h2 {
-  font-size: 2rem;
-  color: #432818;
-  margin-bottom: 15px;
-  font-family: "Cambria", Georgia, serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
 }
+
+.offer-container h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #ADC178;
+    margin-top: 0.5rem;
+    border-radius: 2px;
+}
+
 .feature-list {
-  list-style: disc;
-  padding-left: 20px;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
 }
+
 .feature-list li {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  color: #1a1a1a;
+    margin-bottom: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: #3B2F24;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    position: relative;
 }
+
+.feature-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #ADC178;
+    font-size: 0.7rem;
+    top: 4px;
+}
+
 .feature-list li strong {
-  color: #a65c2a;
+    color: #6C584C;
+    font-weight: 600;
 }
 
-/* SDGs section */
+/* ───────── SDGs SECTION ───────── */
 .about-sdgs {
-  margin-top: 40px;
-  padding: 60px 20px;
+    margin: 2rem;
+    padding: 3rem 2.5rem;
 }
+
 .about-sdgs h2 {
-  font-size: 2rem;
-  color: #432818;
-  margin-bottom: 20px;
-  font-family: "Cambria", Georgia, serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.3px;
 }
-.about-sdgs p {
-  color: #555;
-  font-size: 1.05rem;
-  margin-bottom: 30px;
+
+.about-sdgs h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #ADC178;
+    margin-top: 0.5rem;
+    border-radius: 2px;
 }
+
+.about-sdgs > p {
+    font-family: 'DM Sans', sans-serif;
+    color: #7A6652;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
 .sdg-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
 }
+
 .sdg-card {
-  background: #f7f2eb;
-  border-left: 5px solid #a65c2a;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fffdf7;
+    border: 1px solid #D6CCBA;
+    border-left: 4px solid #ADC178;
+    border-radius: 14px;
+    padding: 1.8rem;
+    box-shadow: 0 6px 16px rgba(59,47,36,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .sdg-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(59,47,36,0.13);
 }
+
 .sdg-card h3 {
-  font-size: 1.3rem;
-  color: #432818;
-  margin-bottom: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin-bottom: 0.6rem;
 }
+
 .sdg-card p {
-  font-size: 1rem;
-  color: #1a1a1a;
-  line-height: 1.6;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.97rem;
+    color: #7A6652;
+    line-height: 1.65;
 }
 
-/* Team section */
+/* ───────── TEAM SECTION ───────── */
 .about-team {
-  margin-top: 40px;
-  padding: 60px 20px;
-  text-align: center;
-  background: #f7f2eb;
-  border-top: 2px solid #a65c2a;
-  border-radius: 15px 15px 15px 15px;
+    margin: 2rem;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    background: #fbf5e9;
+    border: 1px solid #D6CCBA;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(59,47,36,0.08);
 }
+
 .about-team h2 {
-  font-size: 2rem;
-  color: #432818;
-  margin-bottom: 15px;
-  font-family: "Cambria", Georgia, serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #3B2F24;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.3px;
 }
+
+.about-team h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #ADC178;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
 .about-team p {
-  max-width: 800px;
-  margin: 0 auto 15px auto;
-  font-size: 1rem;
-  color: #1a1a1a;
-  line-height: 1.6;
+    font-family: 'DM Sans', sans-serif;
+    max-width: 800px;
+    margin: 0 auto 1rem auto;
+    font-size: 1rem;
+    color: #7A6652;
+    line-height: 1.7;
 }
 
+/* ───────── RESPONSIVE ───────── */
 @media screen and (max-width: 768px) {
-  .sdg-grid {
-    grid-template-columns: 1fr;
-  }
+    .about-intro {
+        margin: 1rem;
+        padding: 3rem 1.5rem;
+    }
 
-  .about-intro h1 {
-    font-size: 2rem;
-  }
+    .about-intro h1 {
+        font-size: 2.4rem;
+    }
 
-  .offer-container h2,
-  .about-sdgs h2,
-  .about-team h2 {
-    font-size: 1.6rem;
-  }
+    .about-offer,
+    .about-sdgs,
+    .about-team {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+    }
 
-  .about-team p {
-    font-size: 0.95rem;
-  }
+    .offer-container h2,
+    .about-sdgs h2,
+    .about-team h2 {
+        font-size: 1.8rem;
+    }
+
+    .sdg-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-team p {
+        font-size: 0.95rem;
+    }
 }

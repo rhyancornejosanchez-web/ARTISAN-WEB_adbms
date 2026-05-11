@@ -6,11 +6,12 @@
   padding: 32px;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  border-left: 5px solid #a65c2a; 
+  border-left: 5px solid #d2a679a0; 
 }
 
 /* Heading */
 .container h2 {
+  font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: #283029; 
@@ -29,6 +30,7 @@ form label {
 
 /* Inputs & text area */
 .form-control {
+  font-family: 'Poppins', sans-serif;
   width: 100%;
   padding: 10px 14px;
   border: 1px solid #c0b8ac;
@@ -40,6 +42,7 @@ form label {
 }
 
 .form-control:focus {
+  font-family: 'Poppins', sans-serif;
   border-color: #a65c2a;
   box-shadow: 0 0 6px rgba(166, 92, 42, 0.4);
   outline: none;
@@ -51,7 +54,7 @@ form label {
 
 /* Submit button */
 .btn-success {
-  background-color: #a65c2a; 
+  background-color: #3B2F24; 
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -62,7 +65,7 @@ form label {
 }
 
 .btn-success:hover {
-  background-color: #283029; 
-  color: #fff;
+  background-color: #ADC178; 
+  color: #3B2F24;
   transform: translateY(-2px);
 }

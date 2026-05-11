@@ -1,27 +1,30 @@
 {% extends "base.html" %}
 
 {% block title %}Login - Likharyo{% endblock %}
+{% block body_class %}auth-page{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
 <div class="auth-container">
+
     <div class="auth-card">
+
         <h2 class="auth-title">Welcome Back</h2>
         <p class="auth-subtitle">Login to your artisan account</p>
 
         <form method="POST" action="{{ url_for('views.login') }}">
             {{ form.hidden_tag() }}
 
+            <!-- USERNAME -->
             <div class="form-group">
                 {{ form.username.label(class="form-label") }}
-                
+
                 {% if form.username.errors %}
-                    {{ form.username(class="form-input error-border") }}
+                    {{ form.username(class="form-input error-border", placeholder="Enter your username") }}
                     <div class="error-msg">
                         {% for error in form.username.errors %}
                             <span>{{ error }}</span>
@@ -32,9 +35,10 @@
                 {% endif %}
             </div>
 
+            <!-- PASSWORD -->
             <div class="form-group">
                 {{ form.password.label(class="form-label") }}
-                
+
                 <div class="password-wrapper">
                     {% if form.password.errors %}
                         {{ form.password(class="form-input error-border", placeholder="Enter your password") }}
@@ -46,27 +50,31 @@
                     {% else %}
                         {{ form.password(class="form-input", placeholder="Enter your password") }}
                     {% endif %}
+
                     <span class="toggle-password">
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
             </div>
 
+            <!-- REMEMBER -->
             <div class="form-options">
                 <label class="checkbox-container">
                     {{ form.remember_me() }} Remember Me
                 </label>
             </div>
 
+            <!-- BUTTON -->
             <button type="submit" class="auth-btn">Log In</button>
         </form>
 
         <div class="auth-footer">
             <p>Don't have an account? <a href="{{ url_for('views.sign_up') }}">Sign Up</a></p>
         </div>
-    </div>
-</div>
 
+    </div>
+
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -74,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.querySelector("input[name='password']");
 
     togglePassword.addEventListener("click", function() {
-        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-        passwordInput.setAttribute("type", type);
-        this.classList.toggle("fa-eye-slash"); 
+        const type = passwordInput.type === "password" ? "text" : "password";
+        passwordInput.type = type;
+        this.classList.toggle("fa-eye-slash");
     });
 });
 </script>

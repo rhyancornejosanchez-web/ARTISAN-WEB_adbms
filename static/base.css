@@ -1,61 +1,80 @@
+/* ================================
+   BASE DESIGN SYSTEM (LIKHARYO UPDATED)
+================================ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* IMPORTANT FIX */
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(190deg, #f5ebe0); 
-  color: #1a1a1a;       
+  background: #f5ebe0;
+  color: #1a1a1a;
   line-height: 1.6;
+
+  /* FOOTER FIX */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-/* NAVBAR */
+/* ================================
+   NAVBAR (IMPROVED LIKHARYO STYLE)
+================================ */
 
 .navbar {
-  background: #432818; 
-  padding: 10px 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 0px;
-  margin-top: 0px;
+  background: #3B2F24;
+  padding: 0 24px;
+  height: 72px;
   width: 100%;
-  align-self: center;
   position: sticky;
-  height: 80px;
   top: 0;
   z-index: 1000;
-  animation: fadeInDown 1s ease forwards;
-}
 
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-50px); }  
-  to   { opacity: 1; transform: translateY(0); }
+  display: flex;
+  align-items: center;
+
+  box-shadow: 0 4px 16px rgba(59, 47, 36, 0.18);
+  border-bottom: 1px solid rgba(173, 193, 120, 0.15);
 }
 
 .navbar-inner {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  max-width: 1200px; 
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
-.img-logo img { height: 50px; margin-right: 15px; }
 
-.web_title {
-  font-family: 'Great Vibes', cursive; 
-  font-size: 42px;
-  color: #fff;
-  margin-right: auto;
-  letter-spacing: 1px;
+.img-logo img {
+  height: 50px;
+  margin-right: 15px;
 }
 
-.nav-buttons { 
-  display: flex; 
-  gap: 40px;
+/* BRAND */
+
+.web_title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #F0EAD2;
+  letter-spacing: 0.5px;
+  margin-right: auto;
+}
+
+/* NAV LINKS */
+
+.nav-buttons {
+  display: flex;
+  gap: 28px;
   align-items: center;
   padding: 0 10px;
 }
@@ -63,220 +82,244 @@ body {
 .nav-link {
   position: relative;
   text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  font-size: 16px;
-  font-family: 'Vollkorn', serif; 
-  transition: color 0.3s ease;
-  padding: 8px 0;
+  color: #DDE5B6;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: color 0.25s ease;
+  padding: 6px 0;
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
   bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 0;
   height: 2px;
-  background-color: burlywood;
-  transition: width 0.3s ease;
+  background-color: #ADC178;
+  transition: width 0.25s ease;
 }
 
 .nav-link:hover {
-  color: burlywood;
+  color: #F0EAD2;
 }
 
 .nav-link:hover::after {
   width: 100%;
 }
 
-.nav-link:active {
-  transform: scale(0.95);
-}
+/* CART */
 
 .cart-btn {
-  background: #432818;
-  padding: 6px 14px; 
+  background: transparent;
+  padding: 7px 14px;
   border-radius: 20px;
-  color: #fff; 
-  transition: all 0.3s ease;
+  color: #F0EAD2;
   text-decoration: none;
-  font-size: 15px;
-  border: 1px solid #d2a679;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  border: 1px solid rgba(173, 193, 120, 0.4);
+  transition: all 0.25s ease;
 }
 
 .cart-btn:hover {
-  background: #fff; 
-  color: #3e2b1e;
-  border: 1px solid #d2a679;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
-}
-
-.cart-btn:active {
-  transform: scale(0.95);
+  background: #ADC178;
+  color: #3B2F24;
 }
 
 /* DROPDOWN */
-.dropdown { 
-  position: relative; 
-  display: inline-block; 
+
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
 .dropbtn {
-  background: transparent; 
-  color: #fff;
-  padding: 8px 10px; 
-  font-size: 15px;
-  font-family: 'Vollkorn', serif; 
-  border: none; 
-  border-radius: 4px;
-  cursor: pointer; 
-  font-weight: 600;
-  min-width: 140px;
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  transition: background 0.3s ease, color 0.3s ease;
+  background: transparent;
+  color: #DDE5B6;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid rgba(173, 193, 120, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
-.dropbtn:hover { 
-  background: none; 
-  color: burlywood; 
+
+.dropbtn:hover {
+  background: rgba(173, 193, 120, 0.12);
+  color: #F0EAD2;
 }
 
 .dropdown-content {
-  display: none; 
-  position: absolute; 
-  top: 100%; 
+  display: none;
+  position: absolute;
+  top: 100%;
   right: 0;
-  background: #fff; 
+  background: #fff;
   min-width: 180px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-radius: 6px; 
+  border-radius: 6px;
   overflow: hidden;
-  z-index: 1001; 
-  margin-top: 0px;
+  z-index: 1001;
 }
 
 .dropdown-content a {
-  color: #1a1a1a; 
-  padding: 12px 13px;
-  text-decoration: none; 
+  color: #1a1a1a;
+  padding: 12px;
+  text-decoration: none;
   display: block;
-  font-size: 14px; 
-  transition: background 0.3s ease, color 0.3s ease;
+  font-size: 14px;
   border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-.dropdown-content a:hover { 
-  background: #B17F59; 
-  color: white; 
+  transition: background 0.3s ease;
 }
 
-.dropdown:hover .dropdown-content { 
-  display: block; 
+.dropdown-content a:hover {
+  background: #ADC178;
+  color: white;
 }
 
-/* MAIN CONTENT WRAPPER */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
+/* ================================
+   MAIN CONTENT
+================================ */
+
+/* THIS IS THE IMPORTANT PART */
 .content-wrapper {
-  flex: 1; 
-  width: 100%; 
+  flex: 1;
+
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto; 
+
+  margin: 0 auto;
+
   padding: 40px 20px;
-  animation: fadeInRoute 1s ease forwards;
 }
 
-@keyframes fadeInRoute {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+/* CARDS */
 
-/* CARDS / BLOCKS */
 .card {
-  background: #fff; 
+  background: #fff;
   color: #1a1a1a;
   border-left: 5px solid #a65c2a;
-  border-radius: 12px; 
+  border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* FOOTER */
-footer {
-  width: 100%; 
-  padding: 20px;
-  background-color: #432818;
-  text-align: center; 
-  margin-top: auto;
-  border-top: 1px solid #a65c2a;
-}
-footer p { color: #fff; font-size: 14px; }
+/* ================================
+   FOOTER (IMPROVED LIKHARYO STYLE)
+================================ */
 
-/* FLASH MESSAGES */
+footer {
+  width: 100%;
+  padding: 18px 24px;
+  background: #3B2F24;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: 1px solid rgba(173, 193, 120, 0.15);
+  box-shadow: 0 -4px 16px rgba(59, 47, 36, 0.12);
+
+  /* PUSH FOOTER DOWN */
+  margin-top: auto;
+}
+
+footer p {
+  color: #DDE5B6;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.footer-right {
+  color: #A99880;
+  font-size: 12px;
+}
+
+/* ================================
+   FLASH MESSAGES
+================================ */
+
 .flash-container {
-  position: fixed; 
-  top: 90px; 
+  position: fixed;
+  top: 90px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; 
+  width: 100%;
   max-width: 600px;
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  z-index: 2000; 
+  z-index: 2000;
   pointer-events: none;
 }
+
 .flash-message {
-  background: #fff; 
+  background: #fff;
   color: #1a1a1a;
-  padding: 14px 22px; 
+  padding: 14px 22px;
   border-radius: 8px;
-  margin: 8px 0; 
+  margin: 8px 0;
   min-width: 260px;
-  text-align: center; 
-  font-size: 1rem; 
+  text-align: center;
+  font-size: 1rem;
   font-weight: 500;
-  pointer-events: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-left: 5px solid #a65c2a;
-  opacity: 0; 
+  opacity: 0;
   transform: translateY(-10px);
-  animation: flashPop 0.4s ease-out forwards, flashFade 0.5s ease-in forwards 4s;
+  animation:
+    flashPop 0.4s ease-out forwards,
+    flashFade 0.5s ease-in forwards 4s;
 }
-@keyframes flashPop { to { opacity: 1; transform: translateY(0); } }
-@keyframes flashFade { to { opacity: 0; transform: translateY(-10px); } }
 
-/* BUTTONS */
+@keyframes flashPop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flashFade {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
 .btn-success {
-  background-color: #a65c2a; 
+  background-color: #a65c2a;
   color: #fff;
   border: 1px solid #d2a679;
   padding: 12px 28px;
-  border-radius: 8px; 
+  border-radius: 8px;
   font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
 }
-.btn-success:hover { 
-  background-color: #1a1a1a; 
-  color: #fff; 
-  transform: translateY(-2px); 
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+
+.btn-success:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background-color: #555; 
+  background-color: #555;
   color: #fff;
   border: 1px solid #d2a679;
   padding: 12px 28px;
-  border-radius: 8px; 
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.2s ease;
+  border-radius: 8px;
+  transition: 0.3s ease;
 }
-.btn-secondary:hover { 
-  background-color: #777; 
-  transform: translateY(-2px); 
+
+.btn-secondary:hover {
+  background-color: #777;
+  transform: translateY(-2px);
 }

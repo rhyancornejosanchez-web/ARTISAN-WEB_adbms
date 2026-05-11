@@ -7,16 +7,30 @@
     box-sizing:border-box;
 }
 
+:root{
+    --vanilla:#F0EAD2;
+    --cream:#DDE5B6;
+    --olive:#ADC178;
+    --copper:#A98467;
+    --ash:#6C584C;
+    --dark:#3B2F24;
+    --white:#FDFAF4;
+    --text:#3B2F24;
+    --text-soft:#7A6652;
+    --border:#D6CCBA;
+}
+
 body{
-    background:#000;
-    color:#fff;
+    background:var(--vanilla);
+    color:var(--text);
     font-family:'Inter', sans-serif;
+    min-height: 150%;
+    display: flex;
+    flex-direction: column;
 }
 
 section{
-    width:100%;
-    max-width:1450px;
-    margin:auto;
+    flex: 1;
 }
 
 /* ===============================
@@ -25,16 +39,19 @@ section{
 
 /* Likharyo */
 .brand-font{
-    font-family: 'Fleur De Leah', cursive;
+    font-family:'Fleur De Leah', cursive;
     font-size:7rem;
     font-weight:400;
+    color:var(--vanilla);
+    text-shadow:0 4px 14px rgba(0,0,0,.25);
 }
 
 /* About + Services headings */
 .script-font{
-    font-family: 'Ruthie', cursive;
+    font-family:'Ruthie', cursive;
     font-size:4.5rem;
     font-weight:400;
+    color:var(--dark);
 }
 
 /* ===============================
@@ -51,6 +68,8 @@ section{
     justify-content:center;
     align-items:center;
     text-align:center;
+    border:1px solid rgba(173,193,120,.2);
+    box-shadow:0 10px 30px rgba(59,47,36,.15);
 }
 
 .hero-logo{
@@ -60,20 +79,29 @@ section{
     display:block;
     margin-left:auto;
     margin-right:auto;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
 }
 
-/* dark overlay */
+/* overlay */
 .hero::before{
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,.45);
+    background:linear-gradient(
+        rgba(59,47,36,.68),
+        rgba(59,47,36,.58)
+    );
 }
 
 .hero-content{
     position:relative;
     z-index:2;
+}
+
+.hero-content p{
+    color:var(--cream);
+    font-size:16px;
+    letter-spacing:.03em;
 }
 
 /* buttons */
@@ -85,31 +113,36 @@ section{
 }
 
 .btn{
-    padding:10px 26px;
-    border-radius:10px;
+    padding:11px 28px;
+    border-radius:12px;
     font-size:14px;
     text-decoration:none;
     transition:.3s ease;
+    font-weight:500;
 }
 
 /* login button */
 .btn-login{
-    background:#8b5e34;
-    color:#fff;
+    background:var(--olive);
+    color:var(--dark);
+    border:1px solid var(--olive);
 }
 
 .btn-login:hover{
-    background:#734c2a;
+    background:var(--cream);
+    transform:translateY(-2px);
 }
 
 /* signup button */
 .btn-signup{
-    border:1px solid rgba(255,255,255,.7);
-    color:#fff;
+    border:1px solid rgba(240,234,210,.7);
+    color:var(--vanilla);
+    background:transparent;
 }
 
 .btn-signup:hover{
-    background:rgba(255,255,255,.08);
+    background:rgba(240,234,210,.12);
+    border-color:var(--cream);
 }
 
 /* ===============================
@@ -122,8 +155,8 @@ section{
 
 .about-section p{
     font-size:17px;
-    color:#e6e6e6;
-    line-height:1.5;
+    color:var(--text-soft);
+    line-height:1.8;
 }
 
 /* ===============================
@@ -144,16 +177,25 @@ section{
 .service-card{
     display:flex;
     flex-direction:column;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s ease;
+    box-shadow:0 4px 12px rgba(59,47,36,.06);
+}
+
+.service-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 24px rgba(59,47,36,.12);
 }
 
 /* IMAGE BOX */
 .service-image-box{
     position:relative;
     height:150px;
-    border-radius:18px;
     overflow:hidden;
-    border:1px solid rgba(255,255,255,.12);
-    background:#111;
+    background:var(--dark);
 }
 
 .service-image-box img{
@@ -166,7 +208,7 @@ section{
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,.22);
+    background:rgba(59,47,36,.20);
 }
 
 /* NUMBER */
@@ -177,22 +219,43 @@ section{
     z-index:2;
     font-size:13px;
     font-weight:700;
+    background:rgba(240,234,210,.92);
+    color:var(--dark);
+    padding:5px 10px;
+    border-radius:20px;
 }
 
 /* TEXT */
 .service-info{
-    padding-top:12px;
+    padding:16px;
 }
 
 .service-info h3{
     font-size:15px;
     margin-bottom:6px;
+    color:var(--dark);
 }
 
 .service-info p{
     font-size:11px;
-    line-height:1.45;
-    color:rgba(255,255,255,.72);
+    line-height:1.6;
+    color:var(--text-soft);
+}
+
+.footer {
+    width: 100%;
+    padding: 18px 40px;
+    background: #f8f4ef;
+    border-top: 1px solid #d8cfc3;
+}
+
+.footer p {
+    margin: 0;
+    height: 80%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #6b5b4b;
 }
 
 /* ===============================
@@ -216,6 +279,14 @@ section{
     .script-font{
         font-size:3rem;
     }
+
+    .about-section{
+        padding:40px 24px 20px;
+    }
+
+    .services-section{
+        padding:10px 24px 50px;
+    }
 }
 
 @media(max-width:520px){
@@ -229,5 +300,15 @@ section{
 
     .brand-font{
         font-size:3rem;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .btn{
+        width:100%;
+        max-width:220px;
     }
 }

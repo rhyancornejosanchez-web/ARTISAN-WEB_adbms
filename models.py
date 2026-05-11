@@ -27,7 +27,7 @@ class User(UserMixin, db.Model):
     
     # Auth Data
     username = db.Column(db.String(150), unique=True, nullable=False)
-    password_hash = db.Column(db.String(150), nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
     # Profile Data (Address removed and moved to separate table)

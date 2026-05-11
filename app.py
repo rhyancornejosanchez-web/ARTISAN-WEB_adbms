@@ -12,11 +12,18 @@ app = Flask(__name__)
 # --- Configuration ---
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-fallback-change-in-production')
 
-# --- Ensure instance folder exists ---
-os.makedirs(app.instance_path, exist_ok=True)
+# --- MySQL Database Connection ---
+MYSQL_USER = os.environ.get('MYSQL_USER', 'root')
+MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'rhyan12')  # ← change this
+MYSQL_HOST = os.environ.get('MYSQL_HOST', '127.0.0.1')
+MYSQL_PORT = os.environ.get('MYSQL_PORT', '3306')
+MYSQL_DB = os.environ.get('MYSQL_DB', 'artisan_db')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'Web_app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True  # ← add this line
 app.config['UPLOAD_FOLDER'] = 'static/artisans'
 
 # --- Initialize Extensions ---
@@ -61,7 +68,7 @@ def inject_new_orders_count():
 def home():
     if current_user.is_authenticated:
         return render_template("home.html")
-    return redirect(url_for("views.login"))
+    return redirect(url_for("views.landing"))
 
 # --- Main Execution ---
 if __name__ == '__main__':

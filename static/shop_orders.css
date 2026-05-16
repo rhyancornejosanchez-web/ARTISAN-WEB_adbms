@@ -1,116 +1,161 @@
-/* Orders Table Wrapper */
+/* ================================
+   SHOP ORDERS PAGE — LIKHARYO THEME
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* ── PAGE HEADER ── */
+h1:not(.web_title) {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #3B2F24;
+  text-align: center;
+  margin: 36px 0 24px;
+  letter-spacing: 0.3px;
+}
+
+/* ── TABLE WRAPPER ── */
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 32px;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-left: 5px solid #a65c2a; 
-  border-radius: 8px;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #FDFAF4;
+  border: 1px solid #D6CCBA;
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 8px 32px rgba(59, 47, 36, 0.10);
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Table Head */
+/* ── TABLE HEADER ── */
 table th {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  text-align: left;
-  padding: 14px 18px;
+  background: #3B2F24;
+  color: #F0EAD2;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 16px 20px;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid rgba(173, 193, 120, 0.25);
 }
 
-/* Table Rows */
+/* ── TABLE CELLS ── */
 table td {
-  padding: 14px 18px;
-  border-bottom: 1px solid #f0f0f0;
-  vertical-align: top;
-  color: #1a1a1a;
-  font-size: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E8E0D0;
+  vertical-align: middle;
+  color: #3B2F24;
+  font-size: 0.92rem;
 }
 
-/* Item List */
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: #F5F0E8;
+  transition: background 0.2s ease;
+}
+
+/* ── ITEM LIST ── */
 table td ul {
-  padding-left: 18px;
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
 table td li {
   margin-bottom: 6px;
-  color: #3e2b1e;
+  color: #3B2F24;
+  font-weight: 500;
 }
 
-/* Status Text */
-td small {
-  color: #777;
-  font-size: 12px;
+/* ── SMALL TEXT ── */
+table td small {
+  color: #A99880;
+  font-size: 0.82rem;
 }
 
-/* Action Buttons */
+/* ── STATUS TEXT ── */
+.status-awaiting {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #A98467;
+  font-weight: 500;
+}
+
+.status-received {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #6C584C;
+  font-weight: 500;
+}
+
+.status-canceled {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #a94442;
+  font-weight: 500;
+}
+
+/* ── ACTION CELL ── */
+td.action-cell {
+  display: flex;
+  align-items: center;
+}
+
+td.action-cell form {
+  margin: 0;
+}
+
+/* ── SHIP BUTTON ── */
 .btn-primary {
-  background-color: #a65c2a;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 22px;
+  background: #ADC178;
+  color: #3B2F24;
+  border: 1.5px solid #ADC178;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.87rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
-  background-color: #1a1a1a;
-  color: #fff;
+  background: transparent;
+  color: #6C584C;
+  border-color: #ADC178;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.12);
 }
 
-/* Status Text Blocks */
-td:has(form) {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-td:has(form) form {
-  margin: 0;
-}
-
-td:has(form) button {
-  margin: 0;
-}
-
-td:has(form) + td,
-td:has(form) + td small {
-  font-style: italic;
-  color: #5a3c2b;
-}
-
-/* Responsive */
+/* ── RESPONSIVE ── */
 @media screen and (max-width: 768px) {
-  table, thead, tbody, th, td, tr {
+  h1:not(.web_title) {
+    font-size: 1.9rem;
+    margin: 24px 0 16px;
+  }
+
+  table {
     display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
   }
 
-  table tr {
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
-  }
-
-  table th {
-    display: none;
-  }
-
-  table td {
-    padding: 10px 14px;
-    border: none;
-    position: relative;
-  }
-
-  table td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: #a65c2a;
-    display: block;
-    margin-bottom: 6px;
+  td, th {
+    padding: 12px 14px;
   }
 }

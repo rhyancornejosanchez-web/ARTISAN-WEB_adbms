@@ -1,49 +1,67 @@
-/* PAGE HEADER */
+/* ================================
+   MY ORDERS PAGE — LIKHARYO THEME
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* ── PAGE HEADER ── */
 h1:not(.web_title) {
-  font-family: "Poppins", sans-serif;
-  font-size: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
   font-weight: 700;
-  color: #3e2b1e; 
+  color: #3B2F24;
   text-align: center;
-  margin: 30px 0 20px;
+  margin: 36px 0 24px;
+  letter-spacing: 0.3px;
 }
 
-/* TABLE STYLING */
+/* ── TABLE WRAPPER ── */
 table {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto 40px;
+  margin: 0 auto 48px;
   border-collapse: separate;
   border-spacing: 0;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  background: #FDFAF4;
+  border: 1px solid #D6CCBA;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  font-family: "Poppins", sans-serif;
+  box-shadow: 0 8px 32px rgba(59, 47, 36, 0.10);
+  font-family: 'Poppins', sans-serif;
 }
 
+/* ── TABLE HEADER ── */
 th {
-  background: #f9f5f0;
-  color: #432818;
-  font-weight: 700;
+  background: #3B2F24;
+  color: #F0EAD2;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
   padding: 16px 20px;
   text-align: left;
-  border-bottom: 2px solid #ececec;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid rgba(173, 193, 120, 0.25);
 }
 
+/* ── TABLE CELLS ── */
 td {
   padding: 16px 20px;
-  color: #333;
-  border-bottom: 1px solid #f0f0f0;
+  color: #3B2F24;
+  border-bottom: 1px solid #E8E0D0;
   vertical-align: middle;
+  font-size: 0.92rem;
 }
 
 tr:last-child td {
   border-bottom: none;
 }
 
-/* Item List inside Table */
+tr:hover td {
+  background: #F5F0E8;
+  transition: background 0.2s ease;
+}
+
+/* ── ITEM LIST INSIDE TABLE ── */
 td ul {
   list-style: none;
   padding: 0;
@@ -51,20 +69,40 @@ td ul {
 }
 
 td li {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: 500;
+  color: #3B2F24;
 }
 
 td small {
-  color: #888;
-  font-size: 0.85rem;
+  color: #A99880;
+  font-size: 0.82rem;
 }
 
-/* ACTION BUTTONS WRAPPER */
+/* ── "NEW" BADGE ── */
+.badge-new {
+  background: #a94442;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.05em;
+}
+
+/* ── SHIPPED ROW HIGHLIGHT ── */
+tr.row-shipped td {
+  background-color: rgba(173, 193, 120, 0.08);
+}
+
+/* ── ACTION BUTTONS WRAPPER ── */
 .action-buttons {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .action-buttons form {
@@ -72,57 +110,83 @@ td small {
   display: flex;
 }
 
-/* BUTTON STYLES */
+/* ── BASE BUTTON ── */
 .btn {
-  display: inline-block;
-  padding: 10px 18px; 
-  border-radius: 6px;
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.87rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 40px; 
-  line-height: 1.2;
+  transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
-/* View Button */
+/* VIEW BUTTON */
 .btn-view {
-  background-color: #a94442;
-  color: #fff;
-  border: 1px solid #a94442;
+  background: transparent;
+  color: #3B2F24;
+  border-color: #D6CCBA;
 }
 
 .btn-view:hover {
-  background-color: #8c3836;
-  border-color: #8c3836;
-  transform: translateY(-2px);
+  background: #3B2F24;
+  color: #F0EAD2;
+  border-color: #3B2F24;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(59, 47, 36, 0.15);
 }
 
-/* Cancel Button */
+/* CANCEL BUTTON */
 .btn-danger {
-  background-color: #a94442;
-  color: #fff;
-  border: 1px solid #a94442;
+  background: transparent;
+  color: #a94442;
+  border-color: #a94442;
 }
 
 .btn-danger:hover {
-  background-color: #8c3836;
-  border-color: #8c3836;
-  transform: translateY(-2px);
+  background: #a94442;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(169, 68, 66, 0.2);
 }
 
-/* Received Button */
+/* RECEIVED BUTTON */
 .btn-success {
-  background-color: #d2a679;
-  color: #fff;
-  border: 1px solid #d2a679;
+  background: #ADC178;
+  color: #3B2F24;
+  border-color: #ADC178;
 }
 
 .btn-success:hover {
-  background-color: #b17f59;
-  border-color: #b17f59;
-  transform: translateY(-2px);
+  background: transparent;
+  color: #6C584C;
+  border-color: #ADC178;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.12);
+}
+
+/* ── RESPONSIVE ── */
+@media screen and (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+  }
+
+  h1:not(.web_title) {
+    font-size: 1.9rem;
+    margin: 24px 0 16px;
+  }
+
+  td, th {
+    padding: 12px 14px;
+  }
 }

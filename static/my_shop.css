@@ -1,18 +1,19 @@
-/* =========================================
-   SHOP PAGE — NOW ALIGNED WITH MARKET SYSTEM
-========================================= */
+/* ================================
+   MY SHOP PAGE — LIKHARYO THEME
+================================ */
 
-/* SHOP CONTAINER → MATCH MARKET CONTAINER */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* ── SHOP CONTAINER ── */
 .shop-container {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 45px 28px 70px;
   font-family: 'Poppins', sans-serif;
-  background-color: transparent; /* let market background take over */
 }
 
-/* HEADER → MATCH MARKET HEADER STYLE */
+/* ── SHOP HEADER ── */
 .shop-header {
   margin-bottom: 35px;
   display: flex;
@@ -28,31 +29,35 @@
   font-weight: 700;
   color: #3B2F24;
   margin: 0;
+  letter-spacing: 0.3px;
 }
 
-/* ADD BUTTON → MATCH MARKET BUTTON STYLE */
+/* ── ADD PRODUCT BUTTON ── */
 .btn-add-product {
-  padding: 15px 28px;
-  border-radius: 12px;
-  background: #3B2F24;
-  color: #F0EAD2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 28px;
+  border-radius: 10px;
+  background: #ADC178;
+  color: #3B2F24;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   text-decoration: none;
-  border: none;
-  transition: 0.25s ease;
+  border: 1.5px solid #ADC178;
+  transition: all 0.25s ease;
 }
 
 .btn-add-product:hover {
-  background: #ADC178;
-  color: #3B2F24;
+  background: transparent;
+  color: #6C584C;
+  border-color: #ADC178;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.12);
 }
 
-/* =========================================
-   PRODUCT GRID → NOW USE MARKET GRID SYSTEM
-========================================= */
-
+/* ── PRODUCT GRID ── */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -60,69 +65,55 @@
   margin-top: 20px;
 }
 
-/* RESPONSIVE MATCH */
 @media screen and (max-width: 1400px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .product-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media screen and (max-width: 1100px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media screen and (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .shop-header h2 { font-size: 2.2rem; }
 }
 
 @media screen and (max-width: 500px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
+  .product-grid { grid-template-columns: 1fr; }
 }
 
-/* =========================================
-   PRODUCT CARD → UNIFIED WITH ITEM CARD
-========================================= */
-
+/* ── PRODUCT CARD ── */
 .product-card {
-  background: #fff;
+  background: #FDFAF4;
   border-radius: 18px;
   overflow: hidden;
-
-  border: 3px solid #d8c1a7;
-
+  border: 1.5px solid #D6CCBA;
   box-shadow:
-    0 4px 10px rgba(0,0,0,0.03),
-    0 10px 20px rgba(59,47,36,0.05);
-
+    0 4px 10px rgba(0, 0, 0, 0.03),
+    0 10px 20px rgba(59, 47, 36, 0.05);
   display: flex;
   flex-direction: column;
-
-  transition: 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .product-card:hover {
   transform: translateY(-6px);
   border-color: #ADC178;
   box-shadow:
-    0 10px 20px rgba(0,0,0,0.06),
-    0 18px 36px rgba(59,47,36,0.10);
+    0 10px 20px rgba(0, 0, 0, 0.06),
+    0 18px 36px rgba(59, 47, 36, 0.10);
 }
 
-/* IMAGE → MATCH MARKET STYLE */
+/* ── PRODUCT IMAGE ── */
 .product-img {
   width: 100%;
   height: 210px;
   object-fit: cover;
-  border-bottom: 1px solid rgba(210,166,121,0.15);
+  border-bottom: 1px solid rgba(214, 204, 186, 0.5);
 }
 
-/* CONTENT */
+/* ── PRODUCT INFO ── */
 .product-info {
   padding: 18px;
   display: flex;
@@ -130,101 +121,121 @@
   flex: 1;
 }
 
-/* TITLE → MATCH ITEM CARD */
 .product-title {
+  font-family: 'Poppins', sans-serif;
   font-size: 0.98rem;
   font-weight: 600;
   color: #3B2F24;
   line-height: 1.5;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   min-height: 48px;
 }
 
-/* CATEGORY */
 .category-badge {
-  font-size: 0.82rem;
-  color: #8B7355;
-  margin-bottom: 14px;
-  background: transparent;
-  padding: 0;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #A99880;
+  background: #F0EAD2;
+  border-radius: 99px;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+  letter-spacing: 0.03em;
 }
 
-/* DESCRIPTION */
 .product-desc {
-  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
   color: #7A6652;
   margin-bottom: 14px;
+  line-height: 1.5;
 }
 
-/* PRICE + STOCK */
+/* ── PRICE & STOCK ── */
 .price-stock-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .product-price {
-  font-size: 1.08rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #A66A3F;
+  color: #A98467;
 }
 
 .product-stock {
-  font-size: 0.85rem;
-  color: #7B6A58;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  color: #A99880;
 }
 
-/* ACTION BUTTONS */
+/* ── PRODUCT ACTIONS ── */
 .product-actions {
   margin-top: auto;
   display: flex;
   gap: 10px;
 }
 
+.product-actions form {
+  flex: 1;
+  display: flex;
+}
+
 .btn-edit,
 .btn-delete {
   flex: 1;
   text-align: center;
-  padding: 11px 14px;
-  border-radius: 10px;
-  font-size: 0.88rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.87rem;
   font-weight: 600;
   text-decoration: none;
-  transition: 0.25s ease;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1.5px solid transparent;
 }
 
-/* EDIT = PRIMARY */
+/* EDIT */
 .btn-edit {
   background: #3B2F24;
   color: #F0EAD2;
+  border-color: #3B2F24;
 }
 
 .btn-edit:hover {
   background: #ADC178;
   color: #3B2F24;
+  border-color: #ADC178;
 }
 
-/* DELETE = OUTLINE */
+/* DELETE */
 .btn-delete {
   background: transparent;
-  color: #3B2F24;
-  border: 1px solid rgba(210,166,121,0.5);
+  color: #a94442;
+  border-color: #a94442;
+  width: 100%;
 }
 
 .btn-delete:hover {
-  background: #3B2F24;
-  color: #F0EAD2;
+  background: #a94442;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(169, 68, 66, 0.2);
 }
 
-/* EMPTY STATE */
+/* ── EMPTY STATE ── */
 .no-products {
   margin-top: 40px;
-  background: #fff;
+  background: #FDFAF4;
   border-radius: 22px;
   padding: 70px 20px;
   text-align: center;
-  border: 1px dashed rgba(210,166,121,0.35);
+  border: 1.5px dashed #D6CCBA;
 }
 
 .no-products h3 {
@@ -235,5 +246,7 @@
 }
 
 .no-products p {
-  color: #7B6A58;
+  font-family: 'Poppins', sans-serif;
+  color: #A99880;
+  font-size: 0.95rem;
 }

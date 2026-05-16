@@ -98,9 +98,11 @@
 
                 <h3>{{ item.name }}</h3>
 
-                <p class="shop-name">
-                    {{ item.shop.name }}
-                </p>
+                <p class="shop-name">{{ item.shop.name }}</p>
+
+                <span class="category-badge">
+                    {{ item.category.name if item.category else 'Uncategorized' }}
+                </span>
 
                 <span class="price">
                     ₱{{ "%.2f"|format(item.price) }}

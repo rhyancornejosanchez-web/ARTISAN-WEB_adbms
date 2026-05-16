@@ -1,71 +1,193 @@
-/* Container */
+/* ================================
+   NEW BLOG POST — LIKHARYO THEME
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* PAGE LAYOUT */
 .container {
-  max-width: 700px;
-  margin: 40px auto;
-  background: #f8f7f1; 
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  border-left: 5px solid #d2a679a0; 
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 20px 60px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
 }
 
-/* Heading */
+/* CARD WRAP — apply card styling to inner div instead */
+.container > h2,
+.container > form {
+  background: #FDFAF4;
+}
+
+/* Full card look */
+.container {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 20px 60px;
+}
+
+.container > * {
+  background: none;
+}
+
+/* Actual card */
+.container form,
+.container h2 {
+  background: none;
+}
+
+/* Wrap everything visually */
+.container {
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 48px 52px;
+  background: #FDFAF4;
+  border: 1px solid #D6CCBA;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(59, 47, 36, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative top stripe */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ADC178, #A98467, #ADC178);
+}
+
+/* HEADING */
 .container h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: #283029; 
-  margin-bottom: 24px;
-  border-bottom: 2px solid #e5e2d6; 
-  padding-bottom: 8px;
+  color: #3B2F24;
+  text-align: center;
+  margin-bottom: 36px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-/* Form labels */
+/* FORM GROUP SPACING */
+.mb-3 {
+  margin-bottom: 22px;
+}
+
+/* LABELS */
 form label {
-  font-weight: 600;
-  color: #4a3b2d; 
   display: block;
-  margin-bottom: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6C584C;
+  margin-bottom: 8px;
+  padding-left: 2px;
 }
 
-/* Inputs & text area */
+/* INPUTS & TEXTAREA */
 .form-control {
-  font-family: 'Poppins', sans-serif;
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #c0b8ac;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #2d2d2d;
-  background: #faf9f4;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #F5F0E8;
+  border: 1.5px solid #D6CCBA;
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
+  color: #3B2F24;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .form-control:focus {
-  font-family: 'Poppins', sans-serif;
-  border-color: #a65c2a;
-  box-shadow: 0 0 6px rgba(166, 92, 42, 0.4);
   outline: none;
+  border-color: #ADC178;
+  background: #FDFAF4;
+  box-shadow: 0 0 0 3px rgba(173, 193, 120, 0.2);
 }
 
-.mb-3 {
-  margin-bottom: 20px;
+.form-control::placeholder {
+  color: #B0A090;
 }
 
-/* Submit button */
-.btn-success {
-  background-color: #3B2F24; 
-  color: #fff;
+/* TEXTAREA */
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* FILE INPUT */
+input[type="file"].form-control {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: #6C584C;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button {
+  background: #3B2F24;
+  color: #F0EAD2;
   border: none;
-  padding: 10px 20px;
   border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: background 0.2s ease;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button:hover {
+  background: #5C4A36;
+}
+
+/* SUBMIT BUTTON */
+.btn-success {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 28px;
+  padding: 14px 24px;
+  background: #3B2F24;
+  color: #F0EAD2;
+  border: 1.5px solid #3B2F24;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
 }
 
 .btn-success:hover {
-  background-color: #ADC178; 
+  background: transparent;
   color: #3B2F24;
-  transform: translateY(-2px);
+  border-color: #3B2F24;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.15);
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 640px) {
+  .container {
+    padding: 32px 24px;
+    margin: 30px auto;
+  }
+
+  .container h2 {
+    font-size: 1.7rem;
+  }
 }

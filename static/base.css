@@ -8,7 +8,6 @@
   box-sizing: border-box;
 }
 
-/* IMPORTANT FIX */
 html {
   height: 100%;
 }
@@ -18,15 +17,13 @@ body {
   background: #f5ebe0;
   color: #1a1a1a;
   line-height: 1.6;
-
-  /* FOOTER FIX */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 /* ================================
-   NAVBAR (IMPROVED LIKHARYO STYLE)
+   NAVBAR (FIXED — NO MORE SQUISHING)
 ================================ */
 
 .navbar {
@@ -34,6 +31,7 @@ body {
   padding: 0 24px;
   height: 72px;
   width: 100%;
+  min-width: 0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -48,37 +46,47 @@ body {
 .navbar-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
+  gap: 12px;
+  overflow: visible;
+}
+
+/* LOGO */
+.img-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .img-logo img {
   height: 50px;
-  margin-right: 15px;
+  width: auto;
 }
 
-/* BRAND */
-
+/* BRAND TITLE */
 .web_title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 28px;
   font-weight: 600;
   color: #F0EAD2;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
   margin-right: auto;
 }
 
-/* NAV LINKS */
-
+/* NAV LINKS CONTAINER */
 .nav-buttons {
   display: flex;
-  gap: 28px;
+  gap: 6px;
   align-items: center;
-  padding: 0 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
+/* INDIVIDUAL NAV LINKS */
 .nav-link {
   position: relative;
   text-decoration: none;
@@ -87,18 +95,22 @@ body {
   font-size: 14px;
   font-family: 'Poppins', sans-serif;
   transition: color 0.25s ease;
-  padding: 6px 0;
+  padding: 6px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
   bottom: -3px;
-  left: 0;
-  width: 0;
+  left: 10px;
+  width: calc(100% - 20px);
   height: 2px;
   background-color: #ADC178;
-  transition: width 0.25s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .nav-link:hover {
@@ -106,20 +118,21 @@ body {
 }
 
 .nav-link:hover::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
-/* CART */
-
+/* CART BUTTON */
 .cart-btn {
   background: transparent;
-  padding: 7px 14px;
+  padding: 7px 12px;
   border-radius: 20px;
   color: #F0EAD2;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid rgba(173, 193, 120, 0.4);
   transition: all 0.25s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .cart-btn:hover {
@@ -128,21 +141,23 @@ body {
 }
 
 /* DROPDOWN */
-
 .dropdown {
   position: relative;
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .dropbtn {
   background: transparent;
   color: #DDE5B6;
-  padding: 8px 10px;
+  padding: 8px 12px;
   font-size: 13px;
+  font-family: 'Poppins', sans-serif;
   border: 1px solid rgba(173, 193, 120, 0.25);
   border-radius: 6px;
   cursor: pointer;
   transition: 0.25s ease;
+  white-space: nowrap;
 }
 
 .dropbtn:hover {
@@ -153,7 +168,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 100%;           /* FIX: flush against button — no gap to fall through */
   right: 0;
   background: #fff;
   min-width: 180px;
@@ -161,16 +176,22 @@ body {
   border-radius: 6px;
   overflow: hidden;
   z-index: 1001;
+  padding-top: 6px;    /* FIX: visual gap moved INSIDE so hover zone is unbroken */
 }
 
 .dropdown-content a {
   color: #1a1a1a;
-  padding: 12px;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
   font-size: 14px;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
 }
 
 .dropdown-content a:hover {
@@ -186,20 +207,19 @@ body {
    MAIN CONTENT
 ================================ */
 
-/* THIS IS THE IMPORTANT PART */
+main {
+  flex: 1;
+}
+
 .content-wrapper {
   flex: 1;
-
   width: 100%;
   max-width: 1200px;
-
   margin: 0 auto;
-
   padding: 40px 20px;
 }
 
 /* CARDS */
-
 .card {
   background: #fff;
   color: #1a1a1a;
@@ -210,7 +230,7 @@ body {
 }
 
 /* ================================
-   FOOTER (IMPROVED LIKHARYO STYLE)
+   FOOTER
 ================================ */
 
 footer {
@@ -225,7 +245,6 @@ footer {
   border-top: 1px solid rgba(173, 193, 120, 0.15);
   box-shadow: 0 -4px 16px rgba(59, 47, 36, 0.12);
 
-  /* PUSH FOOTER DOWN */
   margin-top: auto;
 }
 

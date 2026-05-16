@@ -1,131 +1,249 @@
-/* Cart Container */
+/* ================================
+   CART PAGE — LIKHARYO THEME
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* ── CENTER CART ON PAGE ── */
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 72px - 57px);
+  padding: 48px 20px;
+}
+
+/* ── CART CONTAINER ── */
 .cart-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 30px;
-  background: #fdfaf6;
-  border: 1px solid #d2a679;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  max-width: 820px;
+  width: 100%;
+  background: #FDFAF4;
+  border: 1px solid #D6CCBA;
+  border-radius: 20px;
+  padding: 40px 44px;
+  box-shadow: 0 8px 32px rgba(59, 47, 36, 0.12);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Cart Title */
+/* Decorative top stripe */
+.cart-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ADC178, #A98467, #ADC178);
+}
+
+/* ── CART TITLE ── */
 .cart-title {
-  font-size: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
   font-weight: 700;
-  color: #3e2b1e;
-  margin-bottom: 24px;
+  color: #3B2F24;
+  margin-bottom: 28px;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.1;
 }
 
-/* Cart List */
+/* ── SHOP GROUP ── */
+.shop-group {
+  border: 1px solid #D6CCBA;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.06);
+}
+
+/* SHOP HEADER */
+.shop-group-header {
+  background: #3B2F24;
+  color: #F0EAD2;
+  padding: 13px 22px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ── CART LIST ── */
 .cart-list {
   list-style: none;
-  padding: 0;
+  padding: 0 22px;
   margin: 0;
 }
 
-/* Cart Item */
+/* ── CART ITEM ── */
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #E8E0D0;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+/* ITEM INFO */
 .item-info {
   display: flex;
-  gap: 15px;
-  font-size: 1rem;
-  color: #3e2b1e;
+  align-items: center;
+  gap: 12px;
   flex: 1;
-  min-width: 250px;
+  min-width: 240px;
+  flex-wrap: wrap;
+  font-family: 'Poppins', sans-serif;
 }
 
 .item-name {
+  font-size: 0.95rem;
   font-weight: 600;
+  color: #3B2F24;
 }
 
 .item-price {
-  color: #d2a679;
-  font-weight: 600;
-  
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #A98467;
 }
 
 .item-qty {
-  color: #5e4a3b;
+  font-size: 0.9rem;
+  color: #7A6652;
+  font-weight: 500;
 }
 
-/* Item Actions */
+/* ITEM ACTIONS */
 .item-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 8px;
-  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-/* Shared button */
-.remove-btn,
-.checkout-btn {
-  width: 160px;              
-  padding: 12px 20px;        
-  border-radius: 10px;       
-  line-height: 1.2;        
-  font-size: 1rem;           
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  border: 1px solid transparent;
-}
-
-/* Remove Button */
+/* ── REMOVE BUTTON ── */
 .remove-btn {
-  background: #a94442;
-  color: #fff;
-  border: 1px solid #a94442;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 20px;
+  background: transparent;
+  color: #a94442;
+  border: 1.5px solid #a94442;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.87rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .remove-btn:hover {
-  background: #d9534f;
-  border-color: #d9534f;
-  transform: translateY(-2px);
+  background: #a94442;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(169, 68, 66, 0.2);
 }
 
-/* Checkout Button */
+/* ── SHOP GROUP FOOTER ── */
+.shop-group-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  border-top: 1px solid #E8E0D0;
+  background: #F5F0E8;
+}
+
+.shop-subtotal {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3B2F24;
+}
+
+/* ── CHECKOUT BUTTON ── */
 .checkout-btn {
-  background: linear-gradient(135deg, #d2a679, #e6c3a1);
-  color: #fff;
-  border: 1px solid #d2a679;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 26px;
+  background: #ADC178;
+  color: #3B2F24;
+  border: 1.5px solid #ADC178;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .checkout-btn:hover {
-  background: #3e2b1e;
-  color: #fff;
-  border-color: #3e2b1e;
-  transform: translateY(-2px);
+  background: transparent;
+  color: #6C584C;
+  border-color: #ADC178;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.12);
 }
 
-/* Cart Total */
-.cart-total {
-  margin-top: 24px;
+/* ── GRAND TOTAL ── */
+.grand-total-box {
   text-align: right;
-  font-size: 1.2rem;
-  color: #3e2b1e;
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3B2F24;
+  margin-top: 12px;
+  padding-top: 20px;
+  border-top: 1.5px solid #D6CCBA;
+  letter-spacing: 0.2px;
 }
 
-/* Empty Cart Message */
+/* ── EMPTY CART ── */
 .empty-cart {
+  font-family: 'Poppins', sans-serif;
   text-align: center;
-  color: #8c6f5a;
+  color: #A99880;
   font-size: 1rem;
-  padding: 20px 0;
+  padding: 32px 0;
+  font-style: italic;
+}
+
+/* ── RESPONSIVE ── */
+@media screen and (max-width: 640px) {
+  main {
+    padding: 24px 16px;
+    align-items: flex-start;
+  }
+
+  .cart-container {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .cart-title {
+    font-size: 1.9rem;
+  }
+
+  .item-info {
+    min-width: 100%;
+  }
+
+  .shop-group-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .checkout-btn {
+    width: 100%;
+  }
 }

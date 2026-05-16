@@ -1,102 +1,207 @@
-/* CONTAINER */
+/* ================================
+   MANAGE PRODUCT — LIKHARYO THEME
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* PAGE LAYOUT */
 .container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  max-width: 680px;
+  margin: 60px auto;
+  padding: 0 20px 60px;
 }
 
 /* CARD */
 .card {
-  background-color: #ffffff;
-  color: #432818;
-  border-radius: 16px;
-  padding: 40px;
-  border: 2px solid #432818; 
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  background: #FDFAF4;
+  border: 1px solid #D6CCBA;
+  border-radius: 20px;
+  padding: 48px 52px;
+  box-shadow: 0 8px 32px rgba(59, 47, 36, 0.12);
+  position: relative;
+  overflow: hidden;
 }
 
-/* HEADER */
+/* Subtle decorative top stripe */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ADC178, #A98467, #ADC178);
+}
+
+/* HEADING */
 .card h2 {
-  font-size: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: #432818;
-  margin-bottom: 30px;
+  color: #3B2F24;
   text-align: center;
+  margin-bottom: 36px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
 }
 
-/* FORM LABELS */
+/* FORM GROUP SPACING */
+.mb-3 {
+  margin-bottom: 22px;
+}
+
+/* LABELS */
 .form-label {
   display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 6px;
-  color: #432818;
-  text-align: left;
-  padding-left: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6C584C;
+  margin-bottom: 8px;
+  padding-left: 2px;
 }
 
-/* FORM CONTROLS */
+/* INPUTS, SELECTS, TEXTAREAS */
 .form-control {
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  color: #432818;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  background: #F5F0E8;
+  border: 1.5px solid #D6CCBA;
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
+  color: #3B2F24;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .form-control:focus {
-  border-color: #d2a679;
-  box-shadow: 0 0 0 0.2rem rgba(210,166,121,0.4);
   outline: none;
+  border-color: #ADC178;
+  background: #FDFAF4;
+  box-shadow: 0 0 0 3px rgba(173, 193, 120, 0.2);
 }
 
-/* SPACING */
-.mb-3 {
-  margin-bottom: 24px !important;
+.form-control::placeholder {
+  color: #B0A090;
 }
 
-/* BUTTONS (Unified Style, inline at bottom) */
-.btn-action {
-  display: inline-block;
-  background-color: #B17F59;
-  color: #fff;
+/* SELECT arrow */
+select.form-control {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236C584C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* TEXTAREA */
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* FILE INPUT */
+input[type="file"].form-control {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: #6C584C;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button {
+  background: #3B2F24;
+  color: #F0EAD2;
   border: none;
-  padding: 12px 28px;         
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.5;           
-  text-decoration: none;      
-  text-align: center;
-  vertical-align: middle;     
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  min-width: 180px;
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
   margin-right: 12px;
+  transition: background 0.2s ease;
 }
 
-.btn-action:hover {
-  background-color: #B17F59;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+input[type="file"].form-control::-webkit-file-upload-button:hover {
+  background: #5C4A36;
+}
+
+/* DIVIDER before buttons */
+.button-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid #E8E0D0;
+}
+
+/* BUTTONS */
+.btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  letter-spacing: 0.02em;
+}
+
+/* Save — primary dark */
+.btn-action:first-child,
+button.btn-action {
+  background: #3B2F24;
+  color: #F0EAD2;
+  border-color: #3B2F24;
+}
+
+button.btn-action:hover {
+  background: transparent;
+  color: #3B2F24;
+  border-color: #3B2F24;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 47, 36, 0.15);
+}
+
+/* Cancel — outline */
+a.btn-action {
+  background: transparent;
+  color: #6C584C;
+  border-color: #D6CCBA;
+}
+
+a.btn-action:hover {
+  background: #F0EAD2;
+  color: #3B2F24;
+  border-color: #C4B8A4;
+  transform: translateY(-1px);
 }
 
 /* RESPONSIVE */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
   .card {
-    padding: 24px;
+    padding: 32px 24px;
   }
 
   .card h2 {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
-  .form-control {
-    font-size: 0.95rem;
+  .button-row {
+    flex-direction: column;
   }
 
-  .btn-action {
+  .btn {
     width: 100%;
-    margin-bottom: 12px;
   }
 }
